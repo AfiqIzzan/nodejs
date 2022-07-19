@@ -21,7 +21,7 @@ console.log("username: " + micro_username);
 connect.getConnection(function (err, connection) {
   if (err) { res.send('Error Database Connection'); }
   else {
-    var sql = "SELECT event_name, people_name FROM participant p INNER JOIN event e ON p.event_id=e.event_id GROUP BY eventname";
+    var sql = "SELECT event_name, people_name FROM participant p INNER JOIN event e ON p.event_id=e.event_id JOIN people pp ON pp.email_address=p.email_address GROUP BY event_name";
     connect.query(sql, function (err, result) {
       if (err) { throw err; }
       else {
