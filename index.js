@@ -25,7 +25,7 @@ app.get('/johor', (req, res) => {
   connect.getConnection(function (err, connection) {
     if (err) { res.send('Error Database Connection'); }
     else {
-      var sql = "SELECT * FROM mosque_management";
+      var sql = "SELECT * FROM mosquemanagement";
       connect.query(sql, function (err, result) {
         if (err) { throw err; }
         else {
