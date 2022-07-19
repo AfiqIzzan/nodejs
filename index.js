@@ -21,7 +21,7 @@ console.log("username: " + micro_username);
 connect.getConnection(function (err, connection) {
   if (err) { res.send('Error Database Connection'); }
   else {
-    var sql = "SELECT p.email_address, e.event_name, pp.people_name FROM participant p JOIN event e ON p.event_id=e.event_id JOIN people pp ON pp.email_address=p.email_address order  BY event_name";
+    var sql = "SELECT e.event_name, pp.people_name FROM participant p JOIN event e ON p.event_id=e.event_id JOIN people pp ON pp.email_address=p.email_address order  BY event_name";
     connect.query(sql, function (err, result) {
       if (err) { throw err; }
       else {
