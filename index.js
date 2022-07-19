@@ -1,6 +1,10 @@
 const express = require('express');
 const app = express();
 
+const mysql = require('mysql');
+const cors = require('cors');
+app.use(cors());
+
 var connect = mysql.createPool({
     host: "us-cdbr-east-06.cleardb.net",
     user: "b848aaa4db1172",
