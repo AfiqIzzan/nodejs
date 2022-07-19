@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/johor', (req, res) => {
-    var micro_username = req.query;
+    var micro_username = req.query.username;
 
   console.log("username: " + micro_username);
 
