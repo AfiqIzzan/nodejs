@@ -13,6 +13,47 @@ var connect = mysql.createPool({
 });
 
 
+app.get('/listeventparticipants', (req, res) => {
+  var micro_username = req.query.username;
+
+console.log("username: " + micro_username);
+
+connect.getConnection(function (err, connection) {
+  if (err) { res.send('Error Database Connection'); }
+  else {
+    var sql = "SELECT event_name, people_name FROM participant p INNER JOIN event e ON p.event_id=e.event_id GROUP BY eventname";
+    connect.query(sql, function (err, result) {
+      if (err) { throw err; }
+      else {
+        res.send(result);
+      }
+    connection.release();
+    });
+  }
+});
+});
+
+
+app.get('/listpeople', (req, res) => {
+  var micro_username = req.query.username;
+
+console.log("username: " + micro_username);
+
+connect.getConnection(function (err, connection) {
+  if (err) { res.send('Error Database Connection'); }
+  else {
+    var sql = "SELECT * FROM people";
+    connect.query(sql, function (err, result) {
+      if (err) { throw err; }
+      else {
+        res.send(result);
+      }
+    connection.release();
+    });
+  }
+});
+});
+
 app.get('/', (req, res) => {
     res.send('Salam Muafakat!');
 });
@@ -36,7 +77,9 @@ app.get('/listevent', (req, res) => {
     }
   });
 });
-app.get('/listpeople', (req, res) => {
+
+
+app.get('/report', (req, res) => {
   var micro_username = req.query.username;
 
 console.log("username: " + micro_username);
@@ -44,7 +87,7 @@ console.log("username: " + micro_username);
 connect.getConnection(function (err, connection) {
   if (err) { res.send('Error Database Connection'); }
   else {
-    var sql = "SELECT * FROM people";
+    var sql = "SELECT event_id, event_name, people_name, event_feedback FROM participant GROUP BY event_id";
     connect.query(sql, function (err, result) {
       if (err) { throw err; }
       else {
@@ -55,6 +98,7 @@ connect.getConnection(function (err, connection) {
   }
 });
 });
+
 
 app.listen(process.env.PORT, ()=> {
     console.log('App listening on port 8000!');
