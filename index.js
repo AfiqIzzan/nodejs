@@ -18,14 +18,14 @@ app.get('/', (req, res) => {
 });
 
 app.get('/johor', (req, res) => {
-    var micro_username = req.query;
+    var micro_username = req.query.username;
 
   console.log("username: " + micro_username);
 
   connect.getConnection(function (err, connection) {
     if (err) { res.send('Error Database Connection'); }
     else {
-      var sql = "SELECT * FROM mosquemanagement";
+      var sql = "SELECT * FROM mosque_management";
       connect.query(sql, function (err, result) {
         if (err) { throw err; }
         else {
