@@ -1,6 +1,14 @@
 const express = require('express');
 const app = express();
 
+var connect = mysql.createPool({
+    host: "us-cdbr-east-06.cleardb.net",
+    user: "b848aaa4db1172",
+    password: "5e845f03",
+    database: "heroku_10248fa359e6e82"
+});
+
+
 app.get('/', (req, res) => {
     res.send('Salam Muafakat!');
 });
